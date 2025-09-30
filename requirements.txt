@@ -10,3 +10,6 @@ langchain-community
 google-generativeai
 tavily-python
 langchain-google-genai
+langchain-tavily
+langchain-cohere
+langchain-huggingface

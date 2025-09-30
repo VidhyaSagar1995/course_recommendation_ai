@@ -36,3 +36,9 @@ class Feedback(BaseModel):
     user_id: str          # identify the student
     course_id: str        # which course was liked/disliked
     feedback: str         # "like" or "dislike"
+
+
+class QueryRequest(BaseModel):
+    query: str
+    user_id: str
+    thread_id: Optional[str] = None  # For future use, if needed
