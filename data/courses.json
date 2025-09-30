@@ -1,0 +1,302 @@
+[
+  {
+    "id": "course_001",
+    "title": "Machine Learning Specialization",
+    "provider": "Coursera",
+    "description": "Master fundamental AI concepts and develop practical machine learning skills. Learn supervised learning, neural networks, and best practices for ML development.",
+    "skill_level": "intermediate",
+    "tags": ["machine-learning", "python", "data-science", "neural-networks"],
+    "duration": "3 months",
+    "url": "https://www.coursera.org/specializations/machine-learning-introduction"
+  },
+  {
+    "id": "course_002",
+    "title": "Deep Learning Specialization",
+    "provider": "Coursera",
+    "description": "Build and train deep neural networks, CNNs, RNNs, and more. Learn to apply deep learning to real-world problems.",
+    "skill_level": "advanced",
+    "tags": ["deep-learning", "neural-networks", "tensorflow", "python"],
+    "duration": "5 months",
+    "url": "https://www.coursera.org/specializations/deep-learning"
+  },
+  {
+    "id": "course_003",
+    "title": "Python for Data Science and Machine Learning",
+    "provider": "Udemy",
+    "description": "Learn to use NumPy, Pandas, Seaborn, Matplotlib, Plotly, Scikit-Learn, and TensorFlow for data analysis and machine learning.",
+    "skill_level": "beginner",
+    "tags": ["python", "data-science", "machine-learning", "pandas"],
+    "duration": "25 hours",
+    "url": "https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/"
+  },
+  {
+    "id": "course_004",
+    "title": "Data Structures and Algorithms",
+    "provider": "edX",
+    "description": "Master essential data structures and algorithms. Learn to analyze complexity and solve computational problems efficiently.",
+    "skill_level": "intermediate",
+    "tags": ["algorithms", "data-structures", "computer-science", "programming"],
+    "duration": "4 months",
+    "url": "https://www.edx.org/course/data-structures-and-algorithms"
+  },
+  {
+    "id": "course_005",
+    "title": "Full Stack Web Development",
+    "provider": "Udemy",
+    "description": "Build complete web applications using HTML, CSS, JavaScript, Node.js, React, and MongoDB.",
+    "skill_level": "beginner",
+    "tags": ["web-development", "javascript", "react", "nodejs"],
+    "duration": "54 hours",
+    "url": "https://www.udemy.com/course/the-complete-web-development-bootcamp/"
+  },
+  {
+    "id": "course_006",
+    "title": "Natural Language Processing Specialization",
+    "provider": "Coursera",
+    "description": "Learn NLP techniques including sentiment analysis, machine translation, and question answering using deep learning.",
+    "skill_level": "advanced",
+    "tags": ["nlp", "deep-learning", "python", "machine-learning"],
+    "duration": "4 months",
+    "url": "https://www.coursera.org/specializations/natural-language-processing"
+  },
+  {
+    "id": "course_007",
+    "title": "SQL for Data Analysis",
+    "provider": "Udacity",
+    "description": "Learn SQL to extract and analyze data from databases. Master joins, aggregations, and subqueries.",
+    "skill_level": "beginner",
+    "tags": ["sql", "data-analysis", "database", "data-science"],
+    "duration": "4 weeks",
+    "url": "https://www.udacity.com/course/sql-for-data-analysis--ud198"
+  },
+  {
+    "id": "course_008",
+    "title": "Computer Vision Fundamentals",
+    "provider": "Coursera",
+    "description": "Learn image processing, object detection, and image classification using deep learning and OpenCV.",
+    "skill_level": "intermediate",
+    "tags": ["computer-vision", "deep-learning", "opencv", "python"],
+    "duration": "3 months",
+    "url": "https://www.coursera.org/learn/computer-vision-fundamentals"
+  },
+  {
+    "id": "course_009",
+    "title": "AWS Certified Solutions Architect",
+    "provider": "Udemy",
+    "description": "Master AWS services and architecture. Prepare for the AWS Solutions Architect Associate certification.",
+    "skill_level": "intermediate",
+    "tags": ["aws", "cloud", "devops", "architecture"],
+    "duration": "28 hours",
+    "url": "https://www.udemy.com/course/aws-certified-solutions-architect-associate-saa-c03/"
+  },
+  {
+    "id": "course_010",
+    "title": "Introduction to Artificial Intelligence",
+    "provider": "edX",
+    "description": "Learn AI fundamentals including search algorithms, game playing, machine learning, and neural networks.",
+    "skill_level": "beginner",
+    "tags": ["artificial-intelligence", "machine-learning", "algorithms", "python"],
+    "duration": "12 weeks",
+    "url": "https://www.edx.org/course/artificial-intelligence-ai"
+  },
+  {
+    "id": "course_011",
+    "title": "React - The Complete Guide",
+    "provider": "Udemy",
+    "description": "Master React including Hooks, Redux, React Router, Next.js. Build modern, reactive user interfaces.",
+    "skill_level": "intermediate",
+    "tags": ["react", "javascript", "web-development", "frontend"],
+    "duration": "48 hours",
+    "url": "https://www.udemy.com/course/react-the-complete-guide-incl-redux/"
+  },
+  {
+    "id": "course_012",
+    "title": "Data Engineering on Google Cloud",
+    "provider": "Coursera",
+    "description": "Learn to design and build data processing systems on Google Cloud Platform. Master BigQuery, Dataflow, and more.",
+    "skill_level": "advanced",
+    "tags": ["data-engineering", "cloud", "bigquery", "gcp"],
+    "duration": "6 months",
+    "url": "https://www.coursera.org/professional-certificates/gcp-data-engineering"
+  },
+  {
+    "id": "course_013",
+    "title": "Python Programming Masterclass",
+    "provider": "Udemy",
+    "description": "Comprehensive Python course from basics to advanced. Learn OOP, file I/O, databases, and web scraping.",
+    "skill_level": "beginner",
+    "tags": ["python", "programming", "oop", "beginner"],
+    "duration": "64 hours",
+    "url": "https://www.udemy.com/course/python-the-complete-python-developer-course/"
+  },
+  {
+    "id": "course_014",
+    "title": "DevOps Engineering and CI/CD",
+    "provider": "Udemy",
+    "description": "Master DevOps practices, Docker, Kubernetes, Jenkins, and CI/CD pipelines for modern software development.",
+    "skill_level": "intermediate",
+    "tags": ["devops", "docker", "kubernetes", "cicd"],
+    "duration": "36 hours",
+    "url": "https://www.udemy.com/course/devops-with-docker-kubernetes-and-azure-devops/"
+  },
+  {
+    "id": "course_015",
+    "title": "Statistical Learning and Data Mining",
+    "provider": "edX",
+    "description": "Learn statistical methods for data analysis including regression, classification, and clustering techniques.",
+    "skill_level": "intermediate",
+    "tags": ["statistics", "data-science", "machine-learning", "r"],
+    "duration": "9 weeks",
+    "url": "https://www.edx.org/course/statistical-learning"
+  },
+  {
+    "id": "course_016",
+    "title": "Blockchain and Cryptocurrency Technologies",
+    "provider": "Coursera",
+    "description": "Understand blockchain technology, cryptocurrencies, and decentralized applications. Learn Bitcoin and Ethereum.",
+    "skill_level": "intermediate",
+    "tags": ["blockchain", "cryptocurrency", "web3", "ethereum"],
+    "duration": "4 months",
+    "url": "https://www.coursera.org/learn/cryptocurrency"
+  },
+  {
+    "id": "course_017",
+    "title": "iOS App Development with Swift",
+    "provider": "Udacity",
+    "description": "Build iOS applications using Swift and Xcode. Learn UI design, networking, and Core Data.",
+    "skill_level": "beginner",
+    "tags": ["ios", "swift", "mobile-development", "xcode"],
+    "duration": "3 months",
+    "url": "https://www.udacity.com/course/ios-developer-nanodegree--nd003"
+  },
+  {
+    "id": "course_018",
+    "title": "Cybersecurity Fundamentals",
+    "provider": "Coursera",
+    "description": "Learn security principles, cryptography, network security, and ethical hacking fundamentals.",
+    "skill_level": "beginner",
+    "tags": ["cybersecurity", "security", "networking", "ethical-hacking"],
+    "duration": "6 months",
+    "url": "https://www.coursera.org/specializations/cyber-security"
+  },
+  {
+    "id": "course_019",
+    "title": "Advanced Python Programming",
+    "provider": "Udemy",
+    "description": "Master advanced Python concepts including decorators, generators, context managers, and concurrent programming.",
+    "skill_level": "advanced",
+    "tags": ["python", "programming", "advanced", "multithreading"],
+    "duration": "20 hours",
+    "url": "https://www.udemy.com/course/python-advanced/"
+  },
+  {
+    "id": "course_020",
+    "title": "Big Data Analysis with Spark",
+    "provider": "edX",
+    "description": "Learn to process large-scale datasets using Apache Spark, PySpark, and distributed computing.",
+    "skill_level": "advanced",
+    "tags": ["big-data", "spark", "data-engineering", "python"],
+    "duration": "8 weeks",
+    "url": "https://www.edx.org/course/big-data-analysis-with-apache-spark"
+  },
+  {
+    "id": "course_021",
+    "title": "Data Visualization with Tableau",
+    "provider": "Coursera",
+    "description": "Create impactful data visualizations and dashboards using Tableau. Learn storytelling with data.",
+    "skill_level": "beginner",
+    "tags": ["data-visualization", "tableau", "analytics", "business-intelligence"],
+    "duration": "5 weeks",
+    "url": "https://www.coursera.org/learn/data-visualization"
+  },
+  {
+    "id": "course_022",
+    "title": "Android App Development Masterclass",
+    "provider": "Udemy",
+    "description": "Build Android apps using Kotlin and Java. Learn Android Studio, Material Design, and app architecture.",
+    "skill_level": "intermediate",
+    "tags": ["android", "kotlin", "mobile-development", "java"],
+    "duration": "45 hours",
+    "url": "https://www.udemy.com/course/complete-android-n-developer-course/"
+  },
+  {
+    "id": "course_023",
+    "title": "Reinforcement Learning Specialization",
+    "provider": "Coursera",
+    "description": "Learn RL algorithms, Q-learning, policy gradients, and deep reinforcement learning for AI agents.",
+    "skill_level": "advanced",
+    "tags": ["reinforcement-learning", "deep-learning", "ai", "python"],
+    "duration": "4 months",
+    "url": "https://www.coursera.org/specializations/reinforcement-learning"
+  },
+  {
+    "id": "course_024",
+    "title": "UI/UX Design Bootcamp",
+    "provider": "Udemy",
+    "description": "Master user interface and user experience design. Learn Figma, user research, and design thinking.",
+    "skill_level": "beginner",
+    "tags": ["ui-ux", "design", "figma", "prototyping"],
+    "duration": "32 hours",
+    "url": "https://www.udemy.com/course/ui-ux-web-design-using-figma/"
+  },
+  {
+    "id": "course_025",
+    "title": "Time Series Analysis and Forecasting",
+    "provider": "Coursera",
+    "description": "Learn to analyze and forecast time series data using ARIMA, Prophet, and deep learning methods.",
+    "skill_level": "intermediate",
+    "tags": ["time-series", "forecasting", "data-science", "statistics"],
+    "duration": "4 weeks",
+    "url": "https://www.coursera.org/learn/time-series-forecasting"
+  },
+  {
+    "id": "course_026",
+    "title": "Microservices Architecture",
+    "provider": "Udemy",
+    "description": "Design and build scalable microservices using Spring Boot, Docker, and Kubernetes.",
+    "skill_level": "advanced",
+    "tags": ["microservices", "architecture", "docker", "kubernetes"],
+    "duration": "30 hours",
+    "url": "https://www.udemy.com/course/microservices-with-spring-boot-and-spring-cloud/"
+  },
+  {
+    "id": "course_027",
+    "title": "JavaScript Algorithms and Data Structures",
+    "provider": "freeCodeCamp",
+    "description": "Master algorithms and data structures using JavaScript. Prepare for technical interviews.",
+    "skill_level": "intermediate",
+    "tags": ["javascript", "algorithms", "data-structures", "interview-prep"],
+    "duration": "300 hours",
+    "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/"
+  },
+  {
+    "id": "course_028",
+    "title": "Generative AI and Large Language Models",
+    "provider": "Coursera",
+    "description": "Learn about GPT, BERT, and other LLMs. Understand prompt engineering and fine-tuning techniques.",
+    "skill_level": "advanced",
+    "tags": ["generative-ai", "llm", "nlp", "transformers"],
+    "duration": "3 months",
+    "url": "https://www.coursera.org/learn/generative-ai-with-llms"
+  },
+  {
+    "id": "course_029",
+    "title": "Business Analytics and Intelligence",
+    "provider": "edX",
+    "description": "Learn business analytics, KPIs, A/B testing, and data-driven decision making for business growth.",
+    "skill_level": "beginner",
+    "tags": ["business-analytics", "data-analysis", "statistics", "excel"],
+    "duration": "6 weeks",
+    "url": "https://www.edx.org/course/business-analytics"
+  },
+  {
+    "id": "course_030",
+    "title": "Game Development with Unity",
+    "provider": "Udemy",
+    "description": "Create 2D and 3D games using Unity and C#. Learn game physics, AI, and multiplayer networking.",
+    "skill_level": "intermediate",
+    "tags": ["game-development", "unity", "csharp", "3d"],
+    "duration": "40 hours",
+    "url": "https://www.udemy.com/course/unitycourse/"
+  }
+]

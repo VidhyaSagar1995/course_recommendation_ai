@@ -1,0 +1,63 @@
+Objective
+Design and implement a mini application that provides intelligent course recommendations and career learning path guidance 
+based on a student"s background, interests, and goals. The system should incorporate GenAI techniques, 
+including embedding-based search and prompt or retrieval-based question answering, 
+and should learn from user feedback to refine future recommendations.
+
+Functional Requirements
+1. User Profile Input
+Accept structured or paragraph-style user input capturing:
+* Current background (e.g., "Final-year CS student")
+* Interests (e.g., "AI and Data Science")
+* Career goals (e.g., "Become an ML Engineer at a product company")
+* (Optional) Self-rated skill levels in programming, mathematics, etc.
+
+2. Course Recommendation Engine
+* Use a predefined static dataset of 30-50 online courses (Coursera, Udemy, edX, etc.)
+* Each course must include: 
+    o Title, provider, description, skill level, tags (e.g., "data-science", "beginner")
+* Use sentence embeddings (e.g., OpenAI Embeddings or sentence-transformers) to: 
+    o Encode the user profile
+    o Compute similarity to course descriptions
+    o Return the top 5 most relevant courses
+
+3. Feedback Learning Loop
+Implement a mechanism that allows users to provide feedback (e.g., "like" or "dislike") on recommended courses. 
+Based on this feedback, the system should adapt future recommendations. Choose at least one of the following methods:
+* Vector-Based Adjustment: Adjust the user embedding based on positive/negative feedback
+* Tag Preference Modelling: Learn user preferences across course tags and re-rank accordingly
+* Persistent Feedback Storage: Store user feedback for use in subsequent sessions
+Note: A simple rule-based or heuristic update is acceptable, but clear reasoning and implementation are expected.
+
+4. Learning Path Q&A Agent
+Enable users to ask general questions related to learning paths, such as:
+* "Should I learn Python or R for data science?"
+* "What are the steps to become an ML engineer?"
+Implement using either:
+* Prompt engineering (context-aware input to an LLM), or
+* Retrieval-Augmented Generation (RAG) using a small, curated knowledge base with LangChain, LlamaIndex, or equivalent
+Responses should reflect both factual relevance and user context where possible.
+
+Technical Requirements
+* Language: Python
+* Models/Tools: 
+    o SentenceTransformers or OpenAI Embeddings for course similarity
+    o OpenAI API or local LLM for Q&A
+    o FAISS/Chroma or in-memory search for embedding-based retrieval
+* Interface: Use either CLI or a basic UI (Streamlit or Gradio)
+* Code Quality: Modular, readable, maintainable
+
+Bonus Objectives (Optional but Valued)
+* Store user feedback in a database or persistent format (JSON, SQLite, etc.)
+* Visual display of course tags, skill coverage, or recommendation rationale
+* Filter courses by platform, cost, duration, or difficulty
+* Track session history and personalize based on past interactions
+* Provide a ranked list of recommended learning paths (e.g., course sequences)
+
+Deliverables:
+* Source code with README
+* Dataset of courses (can be CSV or JSON)
+* A working interface or CLI for interaction
+* Sample input/output examples
+* Short note on design choices and improvements
+

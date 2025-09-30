@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Recommendation AI</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Course Recommendation</h1>
+        <form id="profileForm">
+            <div id="inputModeSwitch">
+                <button type="button" id="switchToParagraph" style="margin-bottom:1em;">Switch to Paragraph Input</button>
+                <button type="button" id="switchToStructured" style="margin-bottom:1em;display:none;">Switch to Structured Input</button>
+            </div>
+            <div id="structuredInput">
+                <label>Name: <span style="color:red">*</span>
+                    <input type="text" name="name" required />
+                </label>
+                <label>Current Background:
+                    <input type="text" name="background" placeholder="e.g., Final-year CS student" />
+                </label>
+                <label>Interests (comma separated): <span style="color:red">*</span>
+                    <input type="text" name="interests" required placeholder="e.g., AI, Data Science" />
+                </label>
+                <label>Previous Courses (comma separated IDs):
+                    <input type="text" name="previous_courses" placeholder="e.g., course_001, course_002" />
+                </label>
+                <label>Career Goals:
+                    <textarea name="goals" placeholder="e.g., Become an ML Engineer at a product company"></textarea>
+                </label>
+                <label>Self-rated Skill Levels:
+                    <input type="text" name="skill_levels" placeholder="e.g., programming:advanced, mathematics:intermediate" />
+                </label>
+            </div>
+            <div id="paragraphInput" style="display:none;">
+                <label>Name: <span style="color:red">*</span>
+                    <input type="text" name="name" required />
+                </label>
+                <label>Profile Paragraph: <span style="color:red">*</span>
+                    <textarea name="profile_paragraph" rows="6" placeholder="Describe your background, interests, goals, and skills in a paragraph..."></textarea>
+                </label>
+            </div>
+            <button type="submit">Get Recommendations</button>
+        </form>
+    <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('switchToParagraph').onclick = function() {
+    document.getElementById('structuredInput').style.display = 'none';
+    // Disable structured inputs so "required" won't block submit
+    Array.from(document.querySelectorAll('#structuredInput input, #structuredInput textarea'))
+        .forEach(el => el.disabled = true);
+
+    document.getElementById('paragraphInput').style.display = '';
+    Array.from(document.querySelectorAll('#paragraphInput textarea'))
+        .forEach(el => el.disabled = false);
+
+    this.style.display = 'none';
+    document.getElementById('switchToStructured').style.display = '';
+};
+
+document.getElementById('switchToStructured').onclick = function() {
+    document.getElementById('structuredInput').style.display = '';
+    Array.from(document.querySelectorAll('#structuredInput input, #structuredInput textarea'))
+        .forEach(el => el.disabled = false);
+
+    document.getElementById('paragraphInput').style.display = 'none';
+    Array.from(document.querySelectorAll('#paragraphInput textarea'))
+        .forEach(el => el.disabled = true);
+
+    this.style.display = 'none';
+    document.getElementById('switchToParagraph').style.display = '';
+};
+
+
+        document.getElementById('profileForm').onsubmit = async function(e) {
+            e.preventDefault();
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<h2>Getting recommendations...</h2>'; // Loading state
+
+            const form = e.target;
+            let data;
+
+            // Check which form is active
+            if (paragraphInputDiv.style.display !== 'none') {
+                data = {
+                    name: form.name.value,
+                    profile_paragraph: form.profile_paragraph.value
+                };
+            } else {
+                 data = {
+                    name: form.name.value,
+                    background: form.background.value,
+                    interests: form.interests.value.split(',').map(i => i.trim()),
+                    previous_courses: form.previous_courses.value.split(',').map(c => c.trim()).filter(c => c),
+                    goals: form.goals.value,
+                    skill_levels: form.skill_levels.value
+                };
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:8000/recommend', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.statusText}`);
+                }
+                const result = await response.json();
+                displayRecommendations(result.recommended_courses, data.name);
+            } catch (error) {
+                console.error('Error fetching recommendations:', error);
+                resultDiv.innerHTML = `<p style="color:red;">Failed to fetch recommendations. Please try again. (${error.message})</p>`;
+            }
+        };
+
+        function displayRecommendations(courses, userId) {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<h2>Recommended Courses</h2>';
+
+            if (!courses || courses.length === 0) {
+                resultDiv.innerHTML += '<p>No recommendations found.</p>';
+                return;
+            }
+
+            courses.forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+
+                const tagsHTML = course.tags ? course.tags.map(tag => `<span class="tag">${tag}</span>`).join(' ') : 'N/A';
+
+                // Safely create the card's inner content
+                card.innerHTML = `
+                    <div class="course-header">
+                        <a href="${course.url}" target="_blank" class="course-title">${course.title}</a>
+                        <span class="course-provider">${course.provider}</span>
+                    </div>
+                    <div class="course-desc">${course.description}</div>
+                    <div class="course-tags">${tagsHTML}</div>
+                    <div class="course-meta">
+                        <span>${course.skill_level}</span> | <span>${course.duration}</span>
+                    </div>
+                `;
+
+                // Create and append feedback buttons with proper event listeners
+                const feedbackDiv = document.createElement('div');
+                feedbackDiv.className = 'feedback-buttons';
+                
+                const likeButton = document.createElement('button');
+                likeButton.textContent = 'Like';
+                likeButton.onclick = () => submitFeedback(userId, course.id, 'like');
+
+                const dislikeButton = document.createElement('button');
+                dislikeButton.textContent = 'Dislike';
+                dislikeButton.onclick = () => submitFeedback(userId, course.id, 'dislike');
+
+                feedbackDiv.appendChild(likeButton);
+                feedbackDiv.appendChild(dislikeButton);
+                card.appendChild(feedbackDiv);
+                
+                resultDiv.appendChild(card);
+            });
+        }
+
+        async function submitFeedback(userId, courseId, feedback) {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ user_id: userId, course_id: courseId, feedback: feedback })
+                });
+                const result = await response.json();
+                alert(result.message || 'Feedback submitted!');
+            } catch (error) {
+                console.error('Error submitting feedback:', error);
+                alert('Failed to submit feedback. Please try again.');
+            }
+        }
+    </script>
+</body>
+</html>
