@@ -60,130 +60,137 @@
         #paragraph-form {
             display: none;
         }
-        
-/* Chatbot Container */
-#chatbot-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-  font-family: Arial, sans-serif;
-}
-
-/* Chatbot Toggle Button */
-#chatbot-toggle {
-  width: 60px;
-  height: 60px;
-  font-size: 24px;
-  border-radius: 50%;
-  border: none;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  transition: background 0.2s ease;
-}
-#chatbot-toggle:hover {
-  background-color: #0056b3;
-}
-
-/* Chatbot Window */
-#chatbot-window {
-  display: none; /* controlled by .hidden */
-  width: 340px;
-  max-width: 95vw;
-  height: 500px;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-/* Chatbot Header */
-#chatbot-window .header {
-  background: #007bff;
-  color: white;
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
-}
-#chatbot-close {
-  background: transparent;
-  border: none;
-  font-size: 20px;
-  color: white;
-  cursor: pointer;
-}
-
-/* Messages Area */
-#chatbot-messages {
-  flex: 1;
-  padding: 12px;
-  overflow-y: auto;
-  background: #f5f5f5;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-/* Messages */
-.message {
-  max-width: 80%;
-  padding: 8px 12px;
-  border-radius: 8px;
-  line-height: 1.4;
-  font-size: 14px;
-}
-.message.user {
-  align-self: flex-end;
-  background: #dcf8c6; /* WhatsApp style green */
-}
-.message.bot {
-  align-self: flex-start;
-  background: #fff;
-  border: 1px solid #ddd;
-}
-
-/* Input Area */
-#chatbot-window .footer {
-  border-top: 1px solid #ddd;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  background: #fff;
-}
-#user-id, #chatbot-input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-}
-#chatbot-send {
-  background: #007bff;
-  border: none;
-  color: white;
-  padding: 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-#chatbot-send:hover {
-  background: #0056b3;
-}
-
-/* Hidden utility */
-.hidden {
-  display: none !important;
-}
-
-
-
-/* LaTeX-like styling for Markdown content */
+        /* Skill Levels Styling */
+        .skill-entry {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .skill-entry input {
+            flex: 1;
+        }
+        .skill-entry select {
+            width: 150px;
+        }
+        .remove-skill {
+            background-color: #dc3545;
+        }
+        .remove-skill:hover {
+            background-color: #c82333;
+        }
+        /* Chatbot Container */
+        #chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-family: Arial, sans-serif;
+        }
+        /* Chatbot Toggle Button */
+        #chatbot-toggle {
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            border-radius: 50%;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: background 0.2s ease;
+        }
+        #chatbot-toggle:hover {
+            background-color: #0056b3;
+        }
+        /* Chatbot Window */
+        #chatbot-window {
+            display: none; /* controlled by .hidden */
+            width: 340px;
+            max-width: 95vw;
+            height: 500px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Chatbot Header */
+        #chatbot-window .header {
+            background: #007bff;
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        #chatbot-close {
+            background: transparent;
+            border: none;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+        }
+        /* Messages Area */
+        #chatbot-messages {
+            flex: 1;
+            padding: 12px;
+            overflow-y: auto;
+            background: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        /* Messages */
+        .message {
+            max-width: 80%;
+            padding: 8px 12px;
+            border-radius: 8px;
+            line-height: 1.4;
+            font-size: 14px;
+        }
+        .message.user {
+            align-self: flex-end;
+            background: #dcf8c6; /* WhatsApp style green */
+        }
+        .message.bot {
+            align-self: flex-start;
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+        /* Input Area */
+        #chatbot-window .footer {
+            border-top: 1px solid #ddd;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            background: #fff;
+        }
+        #user-id, #chatbot-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        #chatbot-send {
+            background: #007bff;
+            border: none;
+            color: white;
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        #chatbot-send:hover {
+            background: #0056b3;
+        }
+        /* Hidden utility */
+        .hidden {
+            display: none !important;
+        }
+        /* LaTeX-like styling for Markdown content */
         .markdown-content {
             font-family: 'Times New Roman', Times, serif;
             line-height: 1.6;
@@ -221,7 +228,24 @@
         }
 
 
+        .explanation-section {
+            background-color: #f8f9fa;  /* Light gray background for visibility */
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;  /* Space between explanation and first course */
+        }
 
+        .explanation-section h3 {
+            color: #007bff;  /* Blue heading to match theme */
+            margin-bottom: 10px;
+        }
+
+        .explanation-section p {
+            line-height: 1.6;  /* Adds space between lines in the explanation text */
+            margin-bottom: 0;  /* No extra margin at the end */
+            color: #333;  /* Darker text for readability */
+        }
     </style>
 </head>
 <body>
@@ -249,10 +273,21 @@
             <label for="goals">Career Goals:</label>
             <textarea id="goals"></textarea>
 
-            <label for="skill-levels">Self-rated Skill Levels:</label>
-            <textarea id="skill-levels"></textarea>
+            <label>Skill Levels:</label>
+            <div id="skill-levels-container">
+                <div class="skill-entry">
+                    <input type="text" class="skill-name" placeholder="Skill (e.g., Python)">
+                    <select class="skill-level">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                    <button type="button" class="remove-skill" onclick="removeSkillEntry(this)">Remove</button>
+                </div>
+            </div>
+            <button type="button" onclick="addSkillEntry()">Add Skill</button>
         </form>
-
+<br><br>
         <form id="paragraph-form">
             <label for="para-name">Name: *</label>
             <input type="text" id="para-name" required>
@@ -264,34 +299,47 @@
         <button onclick="getRecommendations()">Get Recommendations</button>
     </div>
 
+    <br>
+    <div id="recommendation-list">
+    <!-- Explanation Section -->
+    <div class="explanation-section">
+        <h3>Why These Recommendations?</h3>
+        <p>Prioritized courses matching your goal. Included courses aligned with your interests. Considered your background for relevant courses. Recommended beginner-level python courses due to your skill level. Added MLOps to bridge your background/interests to your goal. Excluded courses similar to your previous ones.</p>
+    </div>
+    
+    <!-- Course 1 -->
+    <div class="recommendation">
+        <h3>DevOps Foundations</h3>
+        <p><strong>Provider:</strong> Coursera</p>
+        <!-- ... other details ... -->
+    </div>
+    
+    <!-- Course 2, etc. -->
+</div>
+    <br>
+
     <div class="recommendations" id="recommendations">
         <h2>Recommended Courses</h2>
         <div id="recommendation-list"></div>
     </div>
 
     <div id="chatbot-container">
-    <button id="chatbot-toggle" class="bg-blue-500 text-white hover:bg-blue-600">
-        💬
-    </button>
-
-<div id="chatbot-window" class="hidden">
-  <div class="header">
-    <h2>Course Advisor</h2>
-    <button id="chatbot-close">✕</button>
-  </div>
-  <div id="chatbot-messages">
-    <div class="message bot">👋 Hi! I'm your course advisor. Ask me about courses, skills, or learning paths!</div>
-  </div>
-  <div class="footer">
-    <input id="user-id" type="text" placeholder="Enter your user ID" value="test_user">
-    <input id="chatbot-input" type="text" placeholder="Type your question...">
-    <button id="chatbot-send">Send</button>
-  </div>
-</div>
-
-
-
-</div>
+        <button id="chatbot-toggle" class="bg-blue-500 text-white hover:bg-blue-600">💬</button>
+        <div id="chatbot-window" class="hidden">
+            <div class="header">
+                <h2>Course Advisor</h2>
+                <button id="chatbot-close">✕</button>
+            </div>
+            <div id="chatbot-messages">
+                <div class="message bot">👋 Hi! I'm your course advisor. Ask me about courses, skills, or learning paths!</div>
+            </div>
+            <div class="footer">
+                <input id="user-id" type="text" placeholder="Enter your user ID" value="test_user">
+                <input id="chatbot-input" type="text" placeholder="Type your question...">
+                <button id="chatbot-send">Send</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         function showStructuredForm() {
@@ -304,17 +352,48 @@
             document.getElementById('paragraph-form').style.display = 'block';
         }
 
+        function addSkillEntry() {
+            const container = document.getElementById('skill-levels-container');
+            const entry = document.createElement('div');
+            entry.className = 'skill-entry';
+            entry.innerHTML = `
+                <input type="text" class="skill-name" placeholder="Skill (e.g., Python)">
+                <select class="skill-level">
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+                <button type="button" class="remove-skill" onclick="removeSkillEntry(this)">Remove</button>
+            `;
+            container.appendChild(entry);
+        }
+
+        function removeSkillEntry(button) {
+            if (document.querySelectorAll('.skill-entry').length > 1) {
+                button.parentElement.remove();
+            }
+        }
+
         async function getRecommendations() {
             const structuredForm = document.getElementById('structured-form');
             let data;
             if (structuredForm.style.display !== 'none') {
+                const skillEntries = document.querySelectorAll('.skill-entry');
+                const skillLevels = {};
+                skillEntries.forEach(entry => {
+                    const skill = entry.querySelector('.skill-name').value.trim();
+                    const level = entry.querySelector('.skill-level').value;
+                    if (skill) {
+                        skillLevels[skill.toLowerCase()] = level;
+                    }
+                });
                 data = {
                     name: document.getElementById('name').value,
-                    background: document.getElementById('background').value,
+                    background: document.getElementById('background').value || null,
                     interests: document.getElementById('interests').value.split(',').map(i => i.trim()),
-                    previous_courses: document.getElementById('previous-courses').value.split(',').map(c => c.trim()).filter(c => c),
-                    goals: document.getElementById('goals').value,
-                    skill_levels: document.getElementById('skill-levels').value || null
+                    previous_courses: document.getElementById('previous-courses').value.split(',').map(c => c.trim()).filter(c => c) || null,
+                    goals: document.getElementById('goals').value || null,
+                    skill_levels: Object.keys(skillLevels).length > 0 ? skillLevels : null
                 };
             } else {
                 data = {
@@ -329,17 +408,37 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data)
                 });
+                if (!response.ok) throw new Error('Network response was not ok');
                 const result = await response.json();
-                displayRecommendations(result.recommended_courses, data.name);
+                displayRecommendations(result.recommended_courses, data.name, result.explanation);
+                if (result.explanation) {
+                    const recommendationList = document.getElementById('recommendation-list');
+                    const explanationDiv = document.createElement('div');
+                    explanationDiv.className = 'explanation-section';
+                    explanationDiv.innerHTML = `<p><h3>Explanation:</h3> ${result.explanation}</p>`;
+                    recommendationList.prepend(explanationDiv);
+                }
             } catch (error) {
                 console.error('Error fetching recommendations:', error);
                 alert('Failed to fetch recommendations. Please try again.');
             }
         }
 
-        function displayRecommendations(courses, userId) {
+        function displayRecommendations(courses, userId, explanation=null) {
             const recommendationList = document.getElementById('recommendation-list');
             recommendationList.innerHTML = '';
+            // Display explanation if available
+            // if (explanation) {
+            //     const explanationDiv = document.createElement('div');
+            //     explanationDiv.className = 'explanation-section';  // Use CSS class for styling
+            //     explanationDiv.innerHTML = `
+            //         <h3>Why These Recommendations?</h3>
+            //         <p>${explanation}</p>
+            //     `;
+            //     recommendationList.appendChild(explanationDiv);  // Append first, then courses
+            // }
+
+
             courses.forEach(course => {
                 const div = document.createElement('div');
                 div.className = 'recommendation';
@@ -367,6 +466,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ user_id: userId, course_id: courseId, feedback })
                 });
+                if (!response.ok) throw new Error('Feedback submission failed');
                 const result = await response.json();
                 alert(result.message);
             } catch (error) {
@@ -375,126 +475,123 @@
             }
         }
 
-// Chatbot functions
-    const toggleButton = document.getElementById('chatbot-toggle');
-    const closeButton = document.getElementById('chatbot-close');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    
-    toggleButton.addEventListener('click', () => {
-        chatbotWindow.classList.toggle('hidden');
-    });
-    
-    closeButton.addEventListener('click', () => {
-        chatbotWindow.classList.add('hidden');
-    });
-
-    const sendButton = document.getElementById('chatbot-send');
-    const input = document.getElementById('chatbot-input');
-    const userIdInput = document.getElementById('user-id');
-    const messages = document.getElementById('chatbot-messages');
-
-let threadId = null; // Store thread_id for conversation
-
-function addMessage(content, isUser = false) {
-    const messageDiv = document.createElement('div');
-    messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
-    messageDiv.innerHTML = isUser ? content.replace(/\n/g, '<br>') : marked.parse(content);
-    messages.appendChild(messageDiv);
-    messages.scrollTop = messages.scrollHeight;
-}
-
-
-    async function sendFeedbackFromChat(courseId, feedback) {
-        try {
-            const response = await fetch('http://localhost:8000/feedback', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    user_id: userIdInput.value,
-                    course_id: courseId,
-                    feedback: feedback
-                })
-            });
-            if (!response.ok) throw new Error('Feedback failed');
-            console.log('Feedback recorded');
-        } catch (error) {
-            console.error('Feedback error:', error);
-        }
-    }
-
-    function parseCourses(response) {
-        const courseRegex = /\*\*\[(.+?)\]\((.+?)\)\*\*.*?on\s+(\w+).*?\(([\w\s]+),\s*([\d\s\w]+)\)/g;
-        let match;
-        const courses = [];
-        while ((match = courseRegex.exec(response)) !== null) {
-            courses.push({
-                title: match[1],
-                url: match[2],
-                provider: match[3],
-                skill_level: match[4],
-                duration: match[5],
-                id: `course_${Math.random().toString(36).substr(2, 9)}`
-            });
-        }
-        return courses;
-    }
-
-    function renderResponse(response) {
-        const courses = parseCourses(response);
-        let html = response.replace(/\n/g, '<br>');
-        if (courses.length > 0) {
-            html += '<div class="mt-2 space-y-2">';
-            courses.forEach(course => {
-                html += `
-                    <div class="border p-2 rounded">
-                        <p><strong>${course.title}</strong> (${course.provider}, ${course.skill_level}, ${course.duration})</p>
-                        <a href="${course.url}" target="_blank" class="text-blue-500">Link</a>
-                        <button class="like-btn ml-2 text-green-500" data-course-id="${course.id}">Like</button>
-                        <button class="dislike-btn ml-2 text-red-500" data-course-id="${course.id}">Dislike</button>
-                    </div>`;
-            });
-            html += '</div>';
-        }
-        addMessage(html);
+        // Chatbot functions
+        const toggleButton = document.getElementById('chatbot-toggle');
+        const closeButton = document.getElementById('chatbot-close');
+        const chatbotWindow = document.getElementById('chatbot-window');
         
-        document.querySelectorAll('.like-btn').forEach(btn => {
-            btn.addEventListener('click', () => sendFeedbackFromChat(btn.dataset.courseId, 'like'));
+        toggleButton.addEventListener('click', () => {
+            chatbotWindow.classList.toggle('hidden');
         });
-        document.querySelectorAll('.dislike-btn').forEach(btn => {
-            btn.addEventListener('click', () => sendFeedbackFromChat(btn.dataset.courseId, 'dislike'));
+        
+        closeButton.addEventListener('click', () => {
+            chatbotWindow.classList.add('hidden');
         });
-    }
 
-    sendButton.addEventListener('click', async () => {
-        const query = input.value.trim();
-        const userId = userIdInput.value.trim();
-        if (!query || !userId) {
-            addMessage('Please enter a query and user ID.', true);
-            return;
+        const sendButton = document.getElementById('chatbot-send');
+        const input = document.getElementById('chatbot-input');
+        const userIdInput = document.getElementById('user-id');
+        const messages = document.getElementById('chatbot-messages');
+
+        let threadId = null; // Store thread_id for conversation
+
+        function addMessage(content, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            messageDiv.innerHTML = isUser ? content.replace(/\n/g, '<br>') : marked.parse(content);
+            messages.appendChild(messageDiv);
+            messages.scrollTop = messages.scrollHeight;
         }
-        addMessage(query, true);
-        input.value = '';
 
-        try {
-            const response = await fetch('http://localhost:8000/query', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ query, user_id: userId, thread_id: threadId })
+        async function sendFeedbackFromChat(courseId, feedback) {
+            try {
+                const response = await fetch('http://localhost:8000/feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        user_id: userIdInput.value,
+                        course_id: courseId,
+                        feedback: feedback
+                    })
+                });
+                if (!response.ok) throw new Error('Feedback failed');
+                console.log('Feedback recorded');
+            } catch (error) {
+                console.error('Feedback error:', error);
+            }
+        }
+
+        function parseCourses(response) {
+            const courseRegex = /\*\*\[(.+?)\]\((.+?)\)\*\*.*?on\s+(\w+).*?\(([\w\s]+),\s*([\d\s\w]+)\)/g;
+            let match;
+            const courses = [];
+            while ((match = courseRegex.exec(response)) !== null) {
+                courses.push({
+                    title: match[1],
+                    url: match[2],
+                    provider: match[3],
+                    skill_level: match[4],
+                    duration: match[5],
+                    id: `course_${Math.random().toString(36).substr(2, 9)}`
+                });
+            }
+            return courses;
+        }
+
+        function renderResponse(response) {
+            const courses = parseCourses(response);
+            let html = response.replace(/\n/g, '<br>');
+            if (courses.length > 0) {
+                html += '<div class="mt-2 space-y-2">';
+                courses.forEach(course => {
+                    html += `
+                        <div class="border p-2 rounded">
+                            <p><strong>${course.title}</strong> (${course.provider}, ${course.skill_level}, ${course.duration})</p>
+                            <a href="${course.url}" target="_blank" class="text-blue-500">Link</a>
+                            <button class="like-btn ml-2 text-green-500" data-course-id="${course.id}">Like</button>
+                            <button class="dislike-btn ml-2 text-red-500" data-course-id="${course.id}">Dislike</button>
+                        </div>`;
+                });
+                html += '</div>';
+            }
+            addMessage(html);
+            
+            document.querySelectorAll('.like-btn').forEach(btn => {
+                btn.addEventListener('click', () => sendFeedbackFromChat(btn.dataset.courseId, 'like'));
             });
-            if (!response.ok) throw new Error('Network response was not ok');
-            const data = await response.json();
-            threadId = data.thread_id; // Update thread_id
-            renderResponse(data.response);
-        } catch (error) {
-            addMessage(`Error: ${error.message}`);
+            document.querySelectorAll('.dislike-btn').forEach(btn => {
+                btn.addEventListener('click', () => sendFeedbackFromChat(btn.dataset.courseId, 'dislike'));
+            });
         }
-    });
 
-    input.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendButton.click();
-    });
+        sendButton.addEventListener('click', async () => {
+            const query = input.value.trim();
+            const userId = userIdInput.value.trim();
+            if (!query || !userId) {
+                addMessage('Please enter a query and user ID.', true);
+                return;
+            }
+            addMessage(query, true);
+            input.value = '';
 
+            try {
+                const response = await fetch('http://localhost:8000/query', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ query, user_id: userId, thread_id: threadId })
+                });
+                if (!response.ok) throw new Error('Network response was not ok');
+                const data = await response.json();
+                threadId = data.thread_id; // Update thread_id
+                renderResponse(data.response);
+            } catch (error) {
+                addMessage(`Error: ${error.message}`);
+            }
+        });
 
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') sendButton.click();
+        });
     </script>
 </body>
 </html>

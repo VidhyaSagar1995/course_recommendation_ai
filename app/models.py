@@ -27,6 +27,7 @@ class Course(BaseModel):
 class RecommendationResponse(BaseModel):
     user_id: str
     recommended_courses: List[Course]
+    explanation: Optional[str] = None
 
 
 class Feedback(BaseModel):

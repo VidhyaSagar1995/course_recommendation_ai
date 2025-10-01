@@ -1,32 +1,125 @@
-# Student Course Recommendation AI
+# Course Recommendation AI
 
-A FastAPI-based AI software to recommend courses to students based on their profile, interests, and previous courses. Uses LangChain and LangGraph for advanced recommendation logic.
+This project is a student course recommendation system built with FastAPI, LangChain, and various AI tools to provide personalized course suggestions based on student profiles or natural language queries. It includes a web-based interface and a backend API for interaction.
 
-## Features
-- Student profile input
-- Course database
-- AI-powered recommendations
-- REST API endpoints
+## Deliverables
 
-## Getting Started
-1. Install dependencies:
+### 1. Source Code with README
+- The source code is available in this repository, structured with a backend in `app/` and a frontend in `frontend/`.
+- This README provides an overview, setup instructions, and additional details.
+
+### 2. Dataset of Courses
+- The dataset is provided as `courses.json` in the `app/` directory.
+- Format: JSON array of course objects with fields like `id`, `title`, `provider`, `description`, `tags`, `skill_level`, `duration`, and `url`.
+- Example:
+  ```json
+  [
+    {
+      "id": "1",
+      "title": "Machine Learning Basics",
+      "provider": "Coursera",
+      "description": "Introduction to machine learning concepts.",
+      "tags": ["ML", "AI", "Beginner"],
+      "skill_level": "Beginner",
+      "duration": "4 weeks",
+      "url": "https://coursera.org/ml"
+    }
+  ]
+  ```
+
+### 3. A Working Interface or CLI for Interaction
+- **Web Interface**: Accessible at [https://vidhyasagar1995.github.io/course_recommendation_ai/](https://vidhyasagar1995.github.io/course_recommendation_ai/). Users can interact via a chatbot icon in the bottom right corner.
+- **Backend CLI**: Run the API locally after setup (see below) and interact using HTTP requests (e.g., via Postman or curl).
+
+### 4. Sample Input/Output Examples
+- **Input (Structured Profile)**:
+  ```json
+  {
+    "interests": ["Machine Learning", "Python"],
+    "skill_level": "Intermediate",
+    "preferred_duration": "4-6 weeks"
+  }
+  ```
+  - **Output**:
+    ```json
+    {
+      "recommendations": [
+        {
+          "title": "Machine Learning Basics",
+          "provider": "Coursera",
+          "url": "https://coursera.org/ml",
+          "reason": "Matches interest in Machine Learning and skill level."
+        }
+      ]
+    }
+    ```
+
+- **Input (Paragraph)**:
+  ```json
+  {
+    "query": "I am a Python developer now, I want to become an AI engineer. Is it possible?",
+    "user_id": "test_user"
+  }
+  ```
+  - **Output** (via Chatbot):
+    ```
+    Yes, it's absolutely possible to transition from a Python developer to an AI engineer! Python is a strong foundation for AI/ML. Consider these courses:
+    - [Machine Learning Basics](https://coursera.org/ml) (Coursera, Beginner, 4 weeks)
+    - [Deep Learning Specialization](https://coursera.org/deeplearning) (Coursera, Intermediate, 3 months)
+    Let me know if you'd like more details!
+    ```
+
+- **Input (Greeting)**:
+  ```json
+  {
+    "query": "hi",
+    "user_id": "test_user"
+  }
+  ```
+  - **Output**:
+    ```
+    Hello! How can I assist you with courses or learning today?
+    ```
+
+## Setup Instructions
+
+### Prerequisites
+- API keys for Google (`GOOGLE_API_KEY`), Cohere (`COHERE_API_KEY`), and Tavily (`TAVILY_API_KEY`)
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vidhyasagar1995/course_recommendation_ai.git
+   cd course_recommendation_ai
+   ```
+2. Install dependencies:
    ```bash
    pip install -r requirements.txt
    ```
-2. Run the app:
-   ```bash
-   uvicorn app.main:app --reload
+3. Set environment variables (create a `.env` file in `app/`):
    ```
-3. Access API docs at [http://localhost:8000/docs](http://localhost:8000/docs)
+   GOOGLE_API_KEY=your_google_api_key
+   COHERE_API_KEY=your_cohere_api_key
+   TAVILY_API_KEY=your_tavily_api_key
+   ```
 
-## File Structure
-- `app/main.py`: FastAPI entry point
-- `app/models.py`: Data models
-- `app/database.py`: Course data
-- `app/recommender.py`: Recommendation logic
-- `app/utils.py`: Utilities
+### Running the Backend
+- Start the FastAPI server:
+  ```bash
+  uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+  ```
+- Access the API docs at `http://localhost:8000/docs` to test endpoints like `/recommend` or `/query`.
 
-## Next Steps
-- Integrate real database
-- Enhance AI logic with LangChain/LangGraph
-- Add authentication and more endpoints
+### Using the Web Interface
+- Visit [https://vidhyasagar1995.github.io/course_recommendation_ai/](https://vidhyasagar1995.github.io/course_recommendation_ai/).
+- Click the chatbot icon (bottom right) to interact with the system using natural language.
+
+### Deployment
+- The backend can be deployed on platforms like Render (free tier) with the same `uvicorn` command in the start script.
+- Ensure `courses.json` and `app/` are included in the repository root for deployment.
+
+## Contributing
+Feel free to fork this repository, submit issues, or pull requests for enhancements!
+
+## License
+[MIT License] - See the LICENSE file for details.

@@ -89,7 +89,7 @@ def relevance_checker(state):
     try:
         formatted_prompt = prompt.format(query=state['query'], history=json.dumps(state['conversation_history']))
         # print(f"Formatted prompt: {formatted_prompt}")
-        response = llm.invoke(formatted_prompt).content
+        response = relevance_checker_llm.invoke(formatted_prompt).content
         print(f"Relevance checker response: {response}")
         # Extract JSON from Markdown code block or plain text
         match = re.search(r'\{.*?\}', response, re.DOTALL)
