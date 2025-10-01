@@ -1,122 +1,3 @@
-# from typing import TypedDict, Annotated, List, Dict
-# from langgraph.graph import StateGraph, END
-# from langchain_core.prompts import ChatPromptTemplate
-# from langchain_google_genai import ChatGoogleGenerativeAI
-# from langchain_community.tools.tavily_search import TavilySearchResults
-# from langchain_core.tools import tool
-# from langchain_community.vectorstores import FAISS
-# import sqlite3  # For 
-# from dotenv import load_dotenv
-# load_dotenv()
-
-# # Set up LLM and Tools
-# llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro")#, google_api_key="YOUR_API_KEY")
-# tavily_tool = TavilySearchResults(max_results=5)#, tavily_api_key="YOUR_TAVILY_KEY")
-
-
-# @tool
-# def query_courses_semantic(query: str, k: int = 5) -> List[Dict]:
-#     """Perform semantic search on courses using FAISS."""
-#     # Load FAISS index if not already loaded
-#     # Initialize Gemini embeddings
-#     embeddings = GoogleGenerativeAIEmbeddings(
-#         model="models/embedding-001")
-#     #     ,
-#     #     google_api_key="YOUR_GOOGLE_API_KEY"
-#     # )
-#     vectorstore = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
-#     results = vectorstore.similarity_search_with_score(query, k=k)
-#     return [
-#         {
-#             "id": doc.metadata['id'],
-#             "title": doc.metadata['title'],
-#             "provider": doc.metadata['provider'],
-#             "skill_level": doc.metadata['skill_level'],
-#             "duration": doc.metadata['duration'],
-#             "url": doc.metadata['url'],
-#             "similarity_score": score
-#         }
-#         for doc, score in results
-#     ]
-
-# @tool
-# def query_db(query: str) -> List[dict]:
-#     """Query SQLite DB for courses."""
-#     conn = sqlite3.connect('courses.db')  # Load your DB
-#     cursor = conn.cursor()
-#     # Example: Simple keyword search; improve with embeddings
-#     cursor.execute("SELECT * FROM courses WHERE tags LIKE ? OR description LIKE ?", (f'%{query}%', f'%{query}%'))
-#     results = cursor.fetchall()
-#     conn.close()
-#     return [{"id": r[0], "title": r[1], ...} for r in results]  # Map to dicts
-
-# tools = [tavily_tool, query_db]
-
-# # State
-# class AgentState(TypedDict):
-#     query: str
-#     is_relevant: bool
-#     direct_answer_possible: bool
-#     web_results: Annotated[List[dict], lambda x: x or []]
-#     db_results: Annotated[List[dict], lambda x: x or []]
-#     final_answer: str
-
-# # Node Functions (simplified)
-# def relevance_checker(state):
-#     prompt = ChatPromptTemplate.from_template("Classify relevance: {query}")
-#     response = llm.invoke(prompt.format(query=state['query'])).content
-#     state['is_relevant'] = 'yes' in response.lower()
-#     return state
-
-# def router(state):
-#     prompt = ChatPromptTemplate.from_template("Decide action for: {query}")
-#     response = llm.invoke(prompt.format(query=state['query'])).content
-#     # Parse response (e.g., extract 'direct', 'web', etc.)
-#     if 'direct' in response:
-#         state['direct_answer_possible'] = True
-#     # Else, set tools to call
-#     return state
-
-# def web_search(state):
-#     results = tavily_tool.invoke(state['query'])
-#     state['web_results'] = results
-#     return state
-
-# def db_query(state):
-#     if 'db' in state.get('tools_to_call', []):
-#         results = query_courses_semantic.invoke({"query": state['query'], "k": 5})
-#         state['db_results'] = results
-#     return state
-
-# def synthesizer(state):
-#     prompt = ChatPromptTemplate.from_template("Synthesize: query={query}, web={web_results}, db={db_results}")
-#     state['final_answer'] = llm.invoke(prompt.format(**state)).content
-#     return state
-
-# # Build Graph
-# workflow = StateGraph(state_schema=AgentState)
-# workflow.add_node("relevance_checker", relevance_checker)
-# workflow.add_node("router", router)
-# workflow.add_node("web_search", web_search)
-# workflow.add_node("db_query", db_query)
-# workflow.add_node("synthesizer", synthesizer)
-
-# # Edges
-# workflow.set_entry_point("relevance_checker")
-# workflow.add_conditional_edges("relevance_checker", lambda s: END if not s['is_relevant'] else "router")
-# workflow.add_conditional_edges("router", lambda s: "synthesizer" if s['direct_answer_possible'] else "web_search" if 'web' else "db_query")  # Simplify; use custom condition for 'both'
-# # Add more conditional edges for parallel (e.g., workflow.add_edge("router", "web_search"); workflow.add_edge("router", "db_query"))
-# workflow.add_edge("web_search", "synthesizer")
-# workflow.add_edge("db_query", "synthesizer")
-# workflow.add_edge("synthesizer", END)
-
-# app = workflow.compile()
-
-# # Run example
-# result = app.invoke({"query": "What courses for machine learning?"})
-# print(result['final_answer'])
-
-
 from typing import TypedDict, Annotated, List, Dict
 from langgraph.graph import StateGraph, END
 from langchain_core.prompts import ChatPromptTemplate
@@ -131,16 +12,18 @@ import os
 import operator
 import uuid
 import json
-import sqlite3  # For conversation history
+import sqlite3
 
-# Load environment variables
+
 load_dotenv()
 
-# Set up LLM and Tools
+#LLMs
 relevance_checker_llm = ChatCohere(model="command-a-03-2025", cohere_api_key=os.getenv("COHERE_API_KEY"))
 llm = ChatGoogleGenerativeAI(model="gemini-2.5-pro", google_api_key=os.getenv("GOOGLE_API_KEY"))
 tavily_tool = TavilySearch(max_results=5, tavily_api_key=os.getenv("TAVILY_API_KEY"))
 
+
+#Tools
 @tool
 def query_courses_semantic(query: str, k: int = 5) -> List[Dict]:
     """Perform semantic search on courses using FAISS."""
@@ -167,7 +50,7 @@ class AgentState(TypedDict):
     query: str
     is_relevant: bool
     direct_answer_possible: bool
-    web_results: Annotated[List[dict], operator.add]  # Use operator.add to combine lists
+    web_results: Annotated[List[dict], operator.add]
     db_results: Annotated[List[dict], operator.add]
     final_answer: str
     tools_to_call: List[str]

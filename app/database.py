@@ -1,6 +1,7 @@
-# --- Feedback DB (SQLite) ---
 import sqlite3
 import os
+import json
+from app.models import Course
 
 DB_PATH = os.path.join(os.path.dirname(__file__), 'feedback.db')
 DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'courses.json')
@@ -40,7 +41,7 @@ def init_courses_db():
     conn.commit()
     conn.close()
 
-def dump_courses_to_db():
+def dump_courses_to_database():
     print("dumping courses to db")
     # Only insert if table is empty
     conn = get_db_connection()
@@ -63,6 +64,29 @@ def dump_courses_to_db():
                 course.get('provider')
             ))
         conn.commit()
+    conn.close()
+
+
+def dump_courses_to_db():
+    print("dumping courses to db")
+    conn = get_db_connection()
+    with open(DATA_PATH, 'r', encoding='utf-8') as f:
+        raw_courses = json.load(f)
+    for course in raw_courses:
+        conn.execute('''
+            INSERT OR IGNORE INTO courses (id, title, description, skill_level, tags, duration, url, provider)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        ''', (
+            course['id'],
+            course['title'],
+            course['description'],
+            course['skill_level'],
+            json.dumps(course['tags']),
+            course['duration'],
+            course['url'],
+            course.get('provider')
+        ))
+    conn.commit()
     conn.close()
 
 
@@ -106,18 +130,10 @@ def get_all_feedback():
         result.setdefault(row['user_id'], {})[row['course_id']] = row['feedback']
     return result
 
-import json
-import os
-from app.models import Course
-
-
-
-
 def get_all_courses():
     conn = get_db_connection()
     rows = conn.execute('SELECT * FROM courses').fetchall()
     conn.close()
-    from app.models import Course
     courses = []
     for row in rows:
         course_dict = dict(row)

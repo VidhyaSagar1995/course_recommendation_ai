@@ -1,19 +1,8 @@
 import uuid
 from typing import Union
 from fastapi import FastAPI, HTTPException
-from app.recommender import recommend_courses
-from app.database import save_feedback, get_user_feedback, init_feedback_db
-
-# Ensure knowledge base is built at startup
-from app.build_knowledge_base import ensure_knowledge_base
-# from app.learning_path_qa import LearningPathQnA
-
-# # Build or load knowledge base at startup
-# import os
-
-
-# # Q&A agent instance (will use Gemini and the built knowledge base)
-# qa_agent = LearningPathQnA()
+from app.recommender import recommend_courses, get_recommender_resources
+from app.database import save_feedback
 
 from app.models import StudentProfile, RecommendationResponse, ParagraphProfile, Feedback, QueryRequest
 from app.qa_bot import app as qa_bot_app
@@ -24,11 +13,12 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Or specify ["http://localhost:8080"] for more security
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 @app.post("/recommend", response_model=RecommendationResponse)
 def recommend(student: Union[StudentProfile, ParagraphProfile]):
@@ -42,34 +32,16 @@ def submit_feedback(feedback: Feedback):
     return {"status": "success", "message": f"Feedback saved for {feedback.course_id}"}
 
 
-
 from app.database import init_db
-# Initialize feedback and courses DB on startup
 @app.on_event("startup")
 def startup_event():
     init_db()
-    # ensure_knowledge_base(
-    #     gemini_api_key=os.getenv("GOOGLE_API_KEY"),
-    #     tavily_api_key=os.getenv("TAVILY_API_KEY")
-    # )
-
-
-# Q&A endpoint for learning path questions
-from fastapi import Body
-
-# @app.post("/learning-path-qa")
-# def learning_path_qa(
-#     question: str = Body(..., embed=True),
-#     user_context: str = Body(None, embed=True)
-# ):
-#     answer = qa_agent.answer(question, user_context)
-#     return {"answer": answer}
+    get_recommender_resources()
 
 
 @app.post("/query")
 async def process_query(request: QueryRequest):
     try:
-        # Run qa_bot workflow
         thread_id = request.thread_id or str(uuid.uuid4())
         result = qa_bot_app.invoke({
             "query": request.query,

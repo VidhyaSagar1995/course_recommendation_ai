@@ -8,10 +8,6 @@ load_dotenv()
 
 DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'data', 'courses.json')
 
-# Load courses.json (replace with your file path)
-# with open('courses.json', 'r') as f:
-#     courses = json.load(f)
-
 with open(DATA_PATH, 'r', encoding='utf-8') as f:
     courses = json.load(f)
 
@@ -33,10 +29,10 @@ documents = [
 
 # Initialize Sentence Transformers embeddings (downloads model on first run)
 embeddings = HuggingFaceEmbeddings(
-    model_name="all-MiniLM-L6-v2"  # Lightweight, English-focused; alternatives: "all-mpnet-base-v2" for better quality (slower)
+    model_name="all-MiniLM-L6-v2"  # or "all-mpnet-base-v2"
 )
 
 # Create FAISS index
 vectorstore = FAISS.from_documents(documents, embeddings)
 # Save to disk for reuse (optional)
-vectorstore.save_local("faiss_index2")
+vectorstore.save_local("faiss_index")
