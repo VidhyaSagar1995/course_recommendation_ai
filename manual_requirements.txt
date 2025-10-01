@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pydantic
+sentence-transformers
+faiss-cpu
+langchain
+langgraph-cli[inmen]
+langgraph
+langchain-community
+google-generativeai
+tavily-python
+langchain-google-genai
+langchain-tavily
+langchain-cohere
+langchain-huggingface
