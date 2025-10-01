@@ -2,36 +2,11 @@
 
 This project is a student course recommendation system built with FastAPI, LangChain, and various AI tools to provide personalized course suggestions based on student profiles or natural language queries. It includes a web-based interface and a backend API for interaction.
 
-## Deliverables
-
-### 1. Source Code with README
-- The source code is available in this repository, structured with a backend in `app/` and a frontend in `frontend/`.
-- This README provides an overview, setup instructions, and additional details.
-
-### 2. Dataset of Courses
-- The dataset is provided as `courses.json` in the `app/` directory.
-- Format: JSON array of course objects with fields like `id`, `title`, `provider`, `description`, `tags`, `skill_level`, `duration`, and `url`.
-- Example:
-  ```json
-  [
-    {
-      "id": "1",
-      "title": "Machine Learning Basics",
-      "provider": "Coursera",
-      "description": "Introduction to machine learning concepts.",
-      "tags": ["ML", "AI", "Beginner"],
-      "skill_level": "Beginner",
-      "duration": "4 weeks",
-      "url": "https://coursera.org/ml"
-    }
-  ]
-  ```
-
-### 3. A Working Interface or CLI for Interaction
+### 1. A Working Interface or CLI for Interaction
 - **Web Interface**: Accessible at [https://vidhyasagar1995.github.io/course_recommendation_ai/](https://vidhyasagar1995.github.io/course_recommendation_ai/). Users can interact via a chatbot icon in the bottom right corner.
 - **Backend CLI**: Run the API locally after setup (see below) and interact using HTTP requests (e.g., via Postman or curl).
 
-### 4. Sample Input/Output Examples
+### 2. Sample Input/Output Examples
 - **Input (Structured Profile)**:
   ```json
   {
