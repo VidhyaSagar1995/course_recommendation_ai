@@ -10,7 +10,7 @@ from langchain_cohere import ChatCohere
 from dotenv import load_dotenv
 import os
 import operator
-import uuid
+import re
 import json
 import sqlite3
 
@@ -69,27 +69,34 @@ def relevance_checker(state):
     conn.close()
     state['conversation_history'] = history
     prompt = ChatPromptTemplate.from_template(
-        """Classify if this query is relevant to education, courses, skills, or learning paths, considering the conversation history.
+        """Classify if this query is relevant to education, courses, skills, or learning paths (or greetings like hi or hello and acknowledgements like good or excellent), considering the conversation history.
         Query: {query}
         Conversation history (last 3): {history}
-        Respond in JSON:
-        ```json
-        {
+
+        Respond in JSON format:
+        Respond with ONLY a valid JSON object. No markdown, no code blocks, no extra text.
+        Format: {{
             "relevant": "yes" or "no",
             "reason": "Brief explanation"
-        }
-        ```
+        }}
+
         Examples:
-        - Query: "Courses for machine learning", History: [] -> {"relevant": "yes", "reason": "Asks about courses"}
-        - Query: "Are they on your website?", History: [{"query": "CI/CD learning path", "response": "..."}] -> {"relevant": "yes", "reason": "Refers to previous course-related query"}
-        - Query: "What's the weather?", History: [] -> {"relevant": "no", "reason": "Unrelated to education"}"""
+        - Query: "Courses for machine learning", History: [] -> {{"relevant": "yes", "reason": "Asks about courses"}}
+        - Query: "Are they on your website?", History: [{{"query": "CI/CD learning path", "response": "..."}}] -> {{"relevant": "yes", "reason": "Refers to previous course-related query"}}
+        - Query: "What's the weather?", History: [] -> {{"relevant": "no", "reason": "Unrelated to education"}}
+        - Query: "I want to become an AI engineer", History: [] -> {{"relevant": "yes", "reason": "Career transition question related to learning"}}"""
     )
     try:
         formatted_prompt = prompt.format(query=state['query'], history=json.dumps(state['conversation_history']))
-        print(f"Formatted prompt: {formatted_prompt}")
+        # print(f"Formatted prompt: {formatted_prompt}")
         response = llm.invoke(formatted_prompt).content
         print(f"Relevance checker response: {response}")
-        response_dict = json.loads(response.strip()) if response.startswith('{') else {"relevant": "no", "reason": "Invalid response format"}
+        # Extract JSON from Markdown code block or plain text
+        match = re.search(r'\{.*?\}', response, re.DOTALL)
+        if match:
+            response_dict = json.loads(match.group(0))
+        else:
+            response_dict = {"relevant": "no", "reason": "Invalid response format"}
         state['is_relevant'] = response_dict.get('relevant', 'no').lower() == 'yes'
         if not state['is_relevant']:
             state['final_answer'] = "Please ask a question related to courses or learning paths."
@@ -106,27 +113,35 @@ def router(state):
     if not state['is_relevant']:
         return state
     prompt = ChatPromptTemplate.from_template(
-        """Based on query: {query}
-        Conversation history (last 3): {history}
-        Decide how to answer: 'direct' (no tools), 'web' (external data), 'db' (course database), or 'both' (web+db).
-        Respond in JSON:
-        ```json
-        {
-            "action": "direct" or "web" or "db" or "both",
-            "reason": "Brief explanation"
-        }
-        ```
-        Examples:
-        - Query: "What is machine learning?" -> {"action": "direct", "reason": "General question"}
-        - Query: "Courses for Python" -> {"action": "db", "reason": "Specific course recommendation"}
-        - Query: "Are they on your website?", History: [{"query": "CI/CD learning path", ...}] -> {"action": "db", "reason": "Refers to previous courses"}"""
+                    """Based on query: {query}
+                    Conversation history (last 3): {history}
+
+                    Decide how to answer: 'direct' (no tools), 'web' (external data), 'db' (course database), or 'both' (web+db).
+
+                    Respond in JSON format:
+                    Respond with ONLY a valid JSON object. No markdown, no code blocks, no extra text.
+                    Format: {{
+                        "action": "direct" or "web" or "db" or "both",
+                        "reason": "Brief explanation"
+                    }}
+
+                    Examples:
+                    - Query: "What is machine learning?" -> {{"action": "direct", "reason": "General question"}}
+                    - Query: "Courses for Python" -> {{"action": "db", "reason": "Specific course recommendation"}}
+                    - Query: "Are they on your website?", History: [{{"query": "CI/CD learning path", ...}}] -> {{"action": "db", "reason": "Refers to previous courses"}}
+                    - Query: "I want to become an AI engineer" -> {{"action": "both", "reason": "Career guidance needs courses and context"}}"""
     )
     try:
         formatted_prompt = prompt.format(query=state['query'], history=json.dumps(state['conversation_history']))
-        print(f"Router formatted prompt: {formatted_prompt}")
+        # print(f"Router formatted prompt: {formatted_prompt}")
         response = llm.invoke(formatted_prompt).content
         print(f"Router response: {response}")
-        response_dict = json.loads(response.strip()) if response.startswith('{') else {"action": "db", "reason": "Default to DB"}
+        match = re.search(r'\{.*?\}', response, re.DOTALL)
+        if match:
+            response_dict = json.loads(match.group(0))
+        else:
+            response_dict = {"action": "db", "reason": "Default to DB"}
+        # response_dict = json.loads(response.strip()) if response.startswith('{') else {"action": "db", "reason": "Default to DB"}
         action = response_dict.get('action', 'db').lower()
         state['direct_answer_possible'] = action == 'direct'
         state['tools_to_call'] = (
@@ -225,10 +240,21 @@ workflow.add_edge("synthesizer", END)
 
 app = workflow.compile()
 
-# # Interactive testing
+# Interactive testing
 # while True:
 #     query = input("\nEnter query (or 'quit'): ")
 #     if query.lower() == 'quit':
 #         break
-#     result = app.invoke({"query": query, "web_results": [], "db_results": [], "tools_to_call": []})
+#     result = app.invoke({
+#         "query": query,
+#         "web_results": [],
+#         "db_results": [],
+#         "tools_to_call": [],
+#         "thread_id": "test-thread",
+#         "user_id": "test-user",
+#         "is_relevant": True,
+#         "direct_answer_possible": False,
+#         "final_answer": "",
+#         "conversation_history": []
+#     })
 #     print("\nResponse:", result['final_answer'])

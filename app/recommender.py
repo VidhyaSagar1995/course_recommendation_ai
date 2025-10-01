@@ -151,7 +151,7 @@ def recommend_courses(student: Union[StudentProfile, ParagraphProfile]) -> Recom
     user_embedding = model.encode([profile_text], convert_to_numpy=True)
     user_embedding = adjust_user_embedding(student.name, user_embedding)
 
-    # Get top 10 candidates to ensure enough results after filtering
+    # Get top 10 courses to ensure enough results after filtering
     D, I = faiss_index.search(user_embedding, k=10)
     
     # Filter out previous courses and disliked courses

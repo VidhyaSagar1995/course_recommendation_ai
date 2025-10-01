@@ -43,6 +43,7 @@ def startup_event():
 async def process_query(request: QueryRequest):
     try:
         thread_id = request.thread_id or str(uuid.uuid4())
+        # print("the user requested query is ", request.query)
         result = qa_bot_app.invoke({
             "query": request.query,
             "web_results": [],
