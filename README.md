@@ -2,7 +2,7 @@
 
 This project is a student course recommendation system built with FastAPI, LangChain, and various AI tools to provide personalized course suggestions based on student profiles or natural language queries. It includes a web-based interface and a backend API for interaction.
 
-### 1. A Working Interface or CLI for Interaction
+### 1. UI nterface and backend server or CLI for Interaction
 - **Web Interface**: Accessible at [https://vidhyasagar1995.github.io/course_recommendation_ai/](https://vidhyasagar1995.github.io/course_recommendation_ai/). Users can interact via a chatbot icon in the bottom right corner.
 - **Backend CLI**: Run the API locally after setup (see below) and interact using HTTP requests (e.g., via Postman or curl).
 
@@ -12,7 +12,7 @@ This project is a student course recommendation system built with FastAPI, LangC
   {
     "interests": ["Machine Learning", "Python"],
     "skill_level": "Intermediate",
-    "preferred_duration": "4-6 weeks"
+    "gials": "to become AI engineer from devops engineer"
   }
   ```
   - **Output**:
@@ -23,7 +23,7 @@ This project is a student course recommendation system built with FastAPI, LangC
           "title": "Machine Learning Basics",
           "provider": "Coursera",
           "url": "https://coursera.org/ml",
-          "reason": "Matches interest in Machine Learning and skill level."
+          "description": "Machine Learning fundamentals."
         }
       ]
     }
@@ -32,8 +32,8 @@ This project is a student course recommendation system built with FastAPI, LangC
 - **Input (Paragraph)**:
   ```json
   {
-    "query": "I am a Python developer now, I want to become an AI engineer. Is it possible?",
-    "user_id": "test_user"
+    "profile_paragraph": "I am a Python developer now, I want to become an AI engineer. Is it possible?",
+    "name": "test_user"
   }
   ```
   - **Output** (via Chatbot):
@@ -48,7 +48,8 @@ This project is a student course recommendation system built with FastAPI, LangC
   ```json
   {
     "query": "hi",
-    "user_id": "test_user"
+    "user_id": "test_user",
+  "thread_id": "testthread"
   }
   ```
   - **Output**:
